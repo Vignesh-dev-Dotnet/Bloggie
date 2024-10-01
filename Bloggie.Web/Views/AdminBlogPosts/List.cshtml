@@ -1,0 +1,53 @@
+﻿@model List<Bloggie.Web.Models.Domain.Blogpost>
+@{
+}
+
+<h3>
+	Adding Blogs to Site - Admin Functionality</small>
+</h3>
+
+<div class="container py-5">
+	@if(Model != null && Model.Any())
+	{
+		<table class="table">
+			<thead>
+				<tr>
+					<td>Id</td>
+					<td>Heading</td>
+					<td>Tags</td>
+					<td> </td>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach (var blogpost in Model)
+				{
+					<tr>
+						<td>@blogpost.Id</td>
+						<td>@blogpost.Heading</td>
+						<td>
+							<div class="d-flex">
+								@foreach (var tags in blogpost.Tags)
+								{
+									<span class="badge bg-secondary me-1">@tags.Name</span>
+								}
+							</div>
+						</td>
+						<td>
+							<a asp-area=""
+							   asp-controller="AdminBlogPosts"
+							   asp-action="Edit"
+							   asp-route-id="@blogpost.Id">Edit</a>
+						</td>
+					</tr>
+				}
+			</tbody>
+		</table>
+	}
+	else{
+		<p>No Blogs Found!</p>
+	}
+
+</div>
+
+
+						
